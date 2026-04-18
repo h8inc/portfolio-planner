@@ -23,10 +23,31 @@ export const StepBuffer = ({ config, onUpdate }: StepBufferProps) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div>
-        <h2>Your safety net</h2>
-        <p style={{ color: color.textMuted, marginTop: 4, fontSize: 11, lineHeight: 1.55 }}>
-          Standard rule: keep 3–6 months of essential expenses in cash before deploying into risk
-          assets. Self-employed or volatile industry → 6–12 months. Dependents on a single income → 12+.
+        <h2>Let's protect the essentials first</h2>
+        <p
+          style={{
+            color: color.textSec,
+            marginTop: 6,
+            fontSize: 12,
+            lineHeight: 1.65,
+            maxWidth: 620,
+          }}
+        >
+          Before we run any numbers, let's make sure your basics are covered. A cash reserve is what
+          keeps a bad market from turning into a forced sale at the bottom — it's the single
+          biggest difference between people who compound and people who don't.
+        </p>
+        <p
+          style={{
+            color: color.textMuted,
+            marginTop: 8,
+            fontSize: 11,
+            lineHeight: 1.6,
+            maxWidth: 620,
+          }}
+        >
+          Rule of thumb: 3–6 months of essential expenses in cash. Self-employed or volatile
+          industry → 6–12 months. Single income with dependents → 12+.
         </p>
       </div>
 

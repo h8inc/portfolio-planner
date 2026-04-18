@@ -152,3 +152,18 @@ p { margin: 0; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-mute); }
+
+.onboarding-capital-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+@media (min-width: 880px) {
+  .onboarding-capital-sliders {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    align-items: start;
+  }
+}

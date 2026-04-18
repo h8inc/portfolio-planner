@@ -17,10 +17,20 @@ export const StepAssets = ({ title, subtitle, selected, onChange }: StepAssetsPr
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
       <div>
         <h2>{title}</h2>
-        <p style={{ color: color.textMuted, marginTop: 4, fontSize: 11 }}>{subtitle}</p>
+        <p
+          style={{
+            color: color.textSec,
+            marginTop: 6,
+            fontSize: 12,
+            lineHeight: 1.6,
+            maxWidth: 620,
+          }}
+        >
+          {subtitle}
+        </p>
       </div>
 
       <div
@@ -50,7 +60,7 @@ export const StepAssets = ({ title, subtitle, selected, onChange }: StepAssetsPr
           }}
         >
           {selected.length} selected
-          {selected.length > 1 && ' — weights on next step'}
+          {selected.length > 1 && ' — you can set weights on the review step'}
         </div>
       )}
     </div>

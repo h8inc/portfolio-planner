@@ -1,27 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { color } from '../../utils/tokens'
-
-export const labelStyle: CSSProperties = {
-  fontSize: 12,
-  fontWeight: 400,
-  lineHeight: '16px',
-  color: color.textSec,
-}
-
-export const metaStyle: CSSProperties = {
-  fontSize: 12,
-  fontWeight: 400,
-  lineHeight: '16px',
-  color: color.textMuted,
-  fontVariantNumeric: 'tabular-nums',
-}
-
-export const valueStyle: CSSProperties = {
-  fontSize: 12,
-  lineHeight: '16px',
-  color: color.text,
-  fontVariantNumeric: 'tabular-nums',
-}
+import { labelStyle, valueStyle } from './uiStyles'
 
 interface CardProps {
   children: ReactNode

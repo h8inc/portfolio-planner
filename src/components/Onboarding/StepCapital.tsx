@@ -1,7 +1,7 @@
 import type { UserConfig } from '../../types'
 import { color } from '../../utils/tokens'
-import { NumberInput } from '../common/NumberInput'
-import { Card, SectionHeader, ButtonGroup } from '../common/ui'
+import { formatShortUsd, lumpSumSliderMeta, monthlyDcaSliderMeta } from '../../utils/capitalSliders'
+import { Card, SectionHeader, ButtonGroup, Slider } from '../common/ui'
 
 interface StepCapitalProps {
   readonly config: UserConfig
@@ -18,32 +18,50 @@ const HORIZON_OPTIONS = [
 ] as const
 
 export const StepCapital = ({ config, onUpdate }: StepCapitalProps) => {
+  const lump = lumpSumSliderMeta(config.lumpSumUsd)
+  const dca = monthlyDcaSliderMeta(config.monthlyDcaUsd)
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       <div>
-        <h2>Starting point & horizon</h2>
-        <p style={{ color: color.textMuted, marginTop: 4, fontSize: 11 }}>
-          Lump sum from a liquidation, monthly contributions from income, or both.
+        <h2>How much are you working with?</h2>
+        <p
+          style={{
+            color: color.textSec,
+            marginTop: 6,
+            fontSize: 12,
+            lineHeight: 1.6,
+            maxWidth: 620,
+          }}
+        >
+          A lump sum from a liquidation, ongoing monthly contributions from income, or both. And
+          how long you'd leave it alone — longer horizons give compounding room to work, but widen
+          the uncertainty bands.
         </p>
       </div>
 
       <Card>
         <SectionHeader>Capital</SectionHeader>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-          <NumberInput
+        <div className="onboarding-capital-sliders">
+          <Slider
             label="Lump sum (USD, post-tax)"
-            prefix="$"
             value={config.lumpSumUsd}
+            min={0}
+            max={lump.max}
+            step={lump.step}
             onChange={(v) => onUpdate({ lumpSumUsd: v })}
-            hint="Net proceeds you could deploy today"
+            format={(v) => formatShortUsd(v)}
+            sub={`Net proceeds you could deploy today · max ${formatShortUsd(lump.max)}`}
           />
-          <NumberInput
+          <Slider
             label="Monthly contribution (USD)"
-            prefix="$"
-            suffix="/mo"
             value={config.monthlyDcaUsd}
+            min={0}
+            max={dca.max}
+            step={dca.step}
             onChange={(v) => onUpdate({ monthlyDcaUsd: v })}
-            hint="DCA from income. 0 if none"
+            format={(v) => `${formatShortUsd(v)}/mo`}
+            sub={`DCA from income — $0 if none · max ${formatShortUsd(dca.max)}/mo`}
           />
         </div>
       </Card>
