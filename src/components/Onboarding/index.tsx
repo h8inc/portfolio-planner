@@ -141,6 +141,10 @@ interface StepperProps {
   readonly labels: Record<StepId, string>
 }
 
+const STEPPER_DIAM = 22
+/** Half visual radius: circle + 1px border + glow ring so connectors do not sit under the pill. */
+const STEPPER_HALF_OUTER = 15
+
 const Stepper = ({ steps, current, labels }: StepperProps) => {
   const i = steps.indexOf(current)
   return (
@@ -172,7 +176,7 @@ const Stepper = ({ steps, current, labels }: StepperProps) => {
               style={{
                 position: 'relative',
                 width: '100%',
-                height: 22,
+                height: STEPPER_DIAM,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -184,8 +188,10 @@ const Stepper = ({ steps, current, labels }: StepperProps) => {
                     position: 'absolute',
                     top: '50%',
                     left: 0,
-                    width: '50%',
+                    width: `max(0px, calc(50% - ${STEPPER_HALF_OUTER}px))`,
                     height: 1,
+                    transform: 'translateY(-50%)',
+                    zIndex: 0,
                     background: prevDone ? color.accentDim : color.border,
                   }}
                 />
@@ -195,9 +201,11 @@ const Stepper = ({ steps, current, labels }: StepperProps) => {
                   style={{
                     position: 'absolute',
                     top: '50%',
+                    left: `calc(50% + ${STEPPER_HALF_OUTER}px)`,
                     right: 0,
-                    width: '50%',
                     height: 1,
+                    transform: 'translateY(-50%)',
+                    zIndex: 0,
                     background: nextDone ? color.accentDim : color.border,
                   }}
                 />
@@ -205,9 +213,10 @@ const Stepper = ({ steps, current, labels }: StepperProps) => {
               <span
                 style={{
                   position: 'relative',
-                  width: 22,
-                  height: 22,
-                  borderRadius: 11,
+                  zIndex: 1,
+                  width: STEPPER_DIAM,
+                  height: STEPPER_DIAM,
+                  borderRadius: STEPPER_DIAM / 2,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
