@@ -1,6 +1,7 @@
 import type { AssetClass } from '../../types'
 import { assetPalette, color } from '../../utils/tokens'
 import { formatPct } from '../../utils/format'
+import { AssetIcon } from './assetIcons'
 
 interface AssetCardProps {
   readonly asset: AssetClass
@@ -35,18 +36,17 @@ export const AssetCard = ({ asset, selected, onClick }: AssetCardProps) => {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <div
           style={{
-            width: 26,
-            height: 26,
-            borderRadius: 4,
-            background: `${tint}22`,
+            width: 28,
+            height: 28,
+            borderRadius: 6,
+            background: `${tint}1f`,
             color: tint,
-            fontWeight: 700,
-            fontSize: 12,
             display: 'grid',
             placeItems: 'center',
+            flexShrink: 0,
           }}
         >
-          {asset.icon}
+          <AssetIcon id={asset.id} size={16} />
         </div>
         <div>
           <div style={{ fontWeight: 500, fontSize: 12, color: color.text }}>{asset.name}</div>
